@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>やるんだ村</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <!--<header>
+            <h1 class="title">やるんだ村（仮）</h1>
+        </header>-->
+        <div class="btn_area">
+            <button class="btn" id="btn_todo">やること作成！</button>
+        </div>
+        <div class="todo_area">
+            <p>ここにやることがでてくる</p>
+        </div>
+        <div class="modal" id="modal_todo">
+            <h4>やること</h4>
+            <form>
+                <!-- タイトル -->
+                <div class="todo_content">
+                    <h5>タイトル：</h5>
+                    <input type="text" size="50" placeholder="なにをやるか！">
+                </div>
+                <!-- 内容 -->
+                <div class="todo_content">
+                    <h5>内容　　：</h5>
+                    <input type="text" size="100" placeholder="どんなことやるか！">
+                </div>
+                <div class="todo_content">
+                    <!-- 完了フラグ -->
+                    <input type="checkbox" id="done_flg">
+                    <label id="done_label">未完</label>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./script.js" ></script>
+    <script>
+    $(function(){
+        $('#done_flg').click(function(){
+            if($('#done_flg').prop('checked',true)){
+                $('#done_label').text('完了');
+            } else if($('#done_flg').prop('checked',false)) {
+                $('#done_label').text('未完');
+            }
+        });
+    });
+    </script>
+</html>
