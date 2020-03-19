@@ -42,9 +42,9 @@
     <script>
     $(function(){
         $('#done_flg').click(function(){
-            if($('#done_flg').prop('checked',true)){
+            if($('#done_flg').attr('checked', 'checked')){
                 $('#done_label').text('完了');
-            } else if($('#done_flg').prop('checked',false)) {
+            } else if($('#done_flg').removeAttr('checked', 'checked')) {
                 $('#done_label').text('未完');
             }
         });
