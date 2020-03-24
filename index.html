@@ -3,51 +3,159 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>やるんだ村</title>
+        <title>todoApp@nsktdeluxe</title>
         <link rel="stylesheet" href="./style.css">
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     </head>
     <body>
-        <!--<header>
-            <h1 class="title">やるんだ村（仮）</h1>
-        </header>-->
+        <header>
+            <h1 class="title">todoApp@nsktdeluxe</h1>
+        </header>
+        <div class="container">
+        <div>
+            <h4><i class="fas fa-walking"></i> つかいかた</h4>
+            <span>作成ボタンをクリックして、やることのタイトルと内容を入力したら、保存ボタンをおしてね</span><br/>
+            <i class="fas fa-check-square"></i><span>：完了チェックができます</span><br />
+            <i class="fas fa-trash"></i><span>：つくったTodoを削除します</span>
+        </div>
         <div class="btn_area">
-            <button class="btn" id="btn_todo">やること作成！</button>
+            <button type="button" class="btn btn-lg" id="btn_todo">やること作成！</button>
         </div>
         <div class="todo_area">
-            <p>ここにやることがでてくる</p>
+            <ul>
+                <li class="todo_list" id="todo-list1">
+                    <form id="form1">
+                    <div class="todo_list_title" id="todo-title1">
+                        <span>やること（サンプル）</span>
+                    </div>
+                    <div class="todo_list_content" id="todo-content1">
+                        <span>ないよう（サンプル）</span>
+                    </div>
+                    <div class="todo_icon_area">
+                        <input type="checkbox" name="" id="done-flg">
+                        <i class="fas fa-trash" id="delete"></i>
+                    </div>
+                    </form>
+                </li>
+            </ul>
         </div>
-        <div class="modal" id="modal_todo">
+        <div class="modal" id="modal-todo">
             <h4>やること</h4>
-            <form>
+            <div class="btn_close" id="modal-close">
+                <span>閉じる</span>
+                <i class="fas fa-window-close"></i>
+            </div>
+            <form id="input-form">
                 <!-- タイトル -->
-                <div class="todo_content">
+                <div class="">
                     <h5>タイトル：</h5>
-                    <input type="text" size="50" placeholder="なにをやるか！">
+                    <input type="text" size="50" id="todo-title" placeholder="なにをやるか！">
                 </div>
                 <!-- 内容 -->
-                <div class="todo_content">
+                <div class="">
                     <h5>内容　　：</h5>
-                    <input type="text" size="100" placeholder="どんなことやるか！">
+                    <input type="text" size="100" id="todo-content" placeholder="どんなことやるか！">
                 </div>
-                <div class="todo_content">
-                    <!-- 完了フラグ -->
-                    <input type="checkbox" id="done_flg">
-                    <label id="done_label">未完</label>
+                <!-- 保存 -->
+                <div class="">
+                    <input type="button" class="btn btn-sm" value="保存" id="todo_submit">
                 </div>
             </form>
+        </div>
         </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./script.js" ></script>
     <script>
-    $(function(){
-        $('#done_flg').click(function(){
-            if($('#done_flg').attr('checked', 'checked')){
-                $('#done_label').text('完了');
-            } else if($('#done_flg').removeAttr('checked', 'checked')) {
-                $('#done_label').text('未完');
-            }
+    $(function() {
+    // ヘッダーの高さ分だけコンテンツを下げる
+        var height=$("header").height();
+        $("body").css("margin-top", height + 15);// 15pxだけ余裕をもたせる
+    });
+
+    
+    $('#btn_todo').click(function(){
+    // やることモーダルオープン
+        // オーバーレイ用のHTMLコードを、[body]内の最後に生成する
+        $('body').append('<div id="modal-overlay"></div>');
+
+        // [$modal-overlay][$modal-todo]をフェードインさせる
+        $('#modal-overlay').fadeIn('slow');
+        centeringModalSyncer();
+        $('#modal-todo').fadeIn('slow');
+    });
+
+    function centeringModalSyncer(){
+    //センタリングをする関数
+        //画面(ウィンドウ)の幅を取得し、変数[w]に格納
+        var w = $(window).width();
+
+        //画面(ウィンドウ)の高さを取得し、変数[h]に格納
+        var h = $(window).height();
+
+        //コンテンツ(#modal-todo)の幅を取得し、変数[cw]に格納
+        var cw = $('#modal-todo').outerWidth();
+
+        //コンテンツ(#modal-todo)の高さを取得し、変数[ch]に格納
+        var ch = $('#modal-todo').outerHeight();
+
+        //コンテンツ(#modal-content)を真ん中に配置するのに、左端から何ピクセル離せばいいか？を計算して、変数[pxleft]に格納
+        var pxleft = ((w - cw)/2);
+
+        //コンテンツ(#modal-todo)を真ん中に配置するのに、上部から何ピクセル離せばいいか？を計算して、変数[pxtop]に格納
+        var pxtop = ((h - ch)/2);
+
+        //[#modal-todo]のCSSに[left]の値(pxleft)を設定
+        $('#modal-todo').css({"left": pxleft + 'px'});
+
+        //[#modal-todo]のCSSに[top]の値(pxtop)を設定
+        $('#modal-todo').css({"top": pxtop + 'px'});
+    }
+        
+    $('#modal-overlay,#modal-close').unbind().click(function(){
+    // モーダル閉じる
+        $('#modal-todo, #modal-overlay').fadeOut('slow',function(){
+            //フェードアウト後、[#modal-overlay]をHTML(DOM)上から削除
+            $('#modal-overlay').remove();
+            // フォームをリセットする
+            $('#input-form')[0].reset();
         });
+    });
+    $('#todo_submit').click(function(){
+    // 保存ボタン押下時処理
+        var todoTitle = $('#todo-title').val();
+        var todoContent = $('#todo-content').val();
+        
+        // 入力したものを元画面に反映する
+        $('#todo-title1').text(todoTitle);
+        $('#todo-content1').text(todoContent);
+            
+        $('#modal-todo, #modal-overlay').fadeOut('slow', function(){
+            // フェードアウト後、[#modal-overlay]をHTML(DOM)上から削除
+            $("#modal-overlay").remove();
+            // フォームをリセットする
+            $('#input-form')[0].reset();
+        });
+    });
+
+    $('#done-flg').click(function(){
+    // 完了未完チェックのイベント
+        if($('#done-flg').prop('checked',true)) {
+            // 取り消し線
+            $('#todo-title1').css('text-decoration','line-through');
+            $('#todo-content1').css('text-decoration','line-through');
+        } else {
+            // 取り消し線
+            $('#todo-title1').css('text-decoration','none');
+            $('#todo-content1').css('text-decoration','none');
+        }
+    },function(){
+        
+    });
+        
+    $('#delete').click(function(){
+    // todoを削除する
+        $('#todo-list1').remove();
     });
     </script>
 </html>
