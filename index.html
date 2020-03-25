@@ -119,10 +119,15 @@
         }
         
         // 元画面にやることリストを生成する
-        $('#todo-list-ul').append(`<li class="todo_list" id="">
-                    <div class="todo_list_title" id=""><span>`+ todoTitle +`</span></div>
-                    <div class="todo_list_content" id=""><span>` + todoContent + `</span></div>
-                    <div class="todo_icon_area"><input type="checkbox" name="done" class="check_done" id=""><i class="fas fa-trash" name="delete" id=""></i></div></li>`);
+        $('#todo-list-ul').append(`
+            <li class="todo_list" id="">
+                <div class="todo_list_title" id=""><span>`+ todoTitle +`</span></div>
+                <div class="todo_list_content" id=""><span>` + todoContent + `</span></div>
+                <div class="todo_icon_area"><input type="checkbox" name="done" class="check_done" id="">
+                    <i class="fas fa-trash delete"></i>
+                </div>
+            </li>
+        `);
         
         $('#modal-todo, #modal-overlay').fadeOut('slow', function(){
             // フェードアウト後、[#modal-overlay]をHTML(DOM)上から削除
@@ -146,9 +151,8 @@
         }
     });
     
-    $(document).on('click', '.fa-trash', function(){
+    $('i.delete').on('click', function(){
     // todoを削除する
-    // FIXME:うごかん
         $(this).parent('li').remove();
     });
     </script>
