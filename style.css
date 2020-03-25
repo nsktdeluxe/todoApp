@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/*----- 汎用 -----*/
 body {
     background-color: #fffafa;
 }
@@ -13,7 +14,7 @@ li {
     list-style: none;
 }
 
-/* ヘッダー */
+/*----- ヘッダー -----*/
 header {
     background-color: #696969;
     width: 100%;
@@ -26,6 +27,7 @@ header .title {
     margin-left: 30px;
     color: #fafafa;
 }
+/*----- コンテナ -----*/
 .container {
     max-width: 1140px;
     margin: 0 auto;
@@ -35,31 +37,26 @@ header .title {
     margin: 10px auto;
     text-align: center;
 }
+/*----- ボタン汎用 -----*/
 .btn {
     color: #fafafa;
     background-color: #6a5acd;
 }
+/* ボタン大 */
 .btn-lg {
     font-size: 1.2em;
     border-radius: 10px;
     padding: 10px 12px;
     margin: 10px 20px;
 }
+/* ボタン小 */
 .btn-sm {
     font-size: 0.9em;
     border-radius: 7px;
     padding: 7px 10px;
     /*margin: 7px 17px;*/
 }
-.todo_list_title {
-    min-width: 340px;
-}
-.todo_list_content {
-    min-width:  600px;
-}
-.todo_icon_area {
-    display: none;
-}
+/*----- モーダル -----*/
 .modal {
     background: #fafafa;
     width: 600px;
@@ -72,6 +69,7 @@ header .title {
 .modal h4 {
     display: inline-block;
 }
+/* 閉じるボタン */
 .btn_close {
     display: inline-block;
     float: right;
@@ -79,6 +77,7 @@ header .title {
     font-size: 0.8em;
     margin: 5px;
 }
+/* オーバーレイ */
 #modal-overlay {
 	z-index: 1;
 	display: none;
@@ -103,29 +102,37 @@ header .title {
 .modal > form > div input[type="button"] {
     margin: 0 0 0 auto;
 }
-/* やることエリア（元画面） */
+/*----- やることエリア（元画面） -----*/
 .todo_area{
     background: #333;
     padding: 15px;
     min-height: 600px;
 }
+/* やることリスト */
 .todo_list {
-    background: #fafafa;
+    background: linear-gradient(#fafafa, #ddd);
     color: #333;
     border-left: 7px solid #6a5acd;
     font-size: 1.2em;
     min-height: 60px;
+    margin-bottom: 10px;
 }
 .todo_list div {
     display: inline-block;
     padding: 15px;
 }
+.todo_list_title {
+    min-width: 340px;
+}
 .todo_list_content {
+    min-width:  600px;
     border-left: 1px solid #ccc;
 }
 .todo_icon_area {
     float: right;
-    border-left: 1px solid #ccc;
+}
+.todo_icon_area > input[type="checkbox"] {
+    font-size: 2em;
 }
 .todo_icon_area > i {
     margin-right: 7px;
