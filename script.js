@@ -55,9 +55,13 @@
     // 保存ボタン押下時処理
     var todoTitle = $('#todo-title').val();
     var todoContent = $('#todo-content').val();
-        if(todoTitle =='' || todoContent == ''){
+        if(todoTitle == '' || todoContent == ''){
         // 空入力チェック
             alert('どっちも必須入力です！');
+            return false;
+        } else if(todoTitle.match(/^[ 　¥r¥n¥t]*$/) || todoContent.match(/^[ 　¥r¥n¥t]*$/)) {
+        // スペース入力チェック
+            alert('スペースのみは登録できません。');
             return false;
         }
         
