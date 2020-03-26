@@ -88,6 +88,12 @@ header .title {
 	height: 120%; /* スマホ対策 */
 	background-color:rgba(0,0,0,0.75);
 }
+#todo-title {
+    width: 250px;
+}
+#todo-content {
+    width: 350px;
+}
 .modal > form > div {
     width: 100%;
     display: inline-flex;
